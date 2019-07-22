@@ -29,7 +29,7 @@ matrix add_mat (matrix m1, matrix m2)
 	int m2_row = m2.size ();
 	int m2_col = m2[0].size ();
 	matrix m3 ( m1_row, vector<double> ( m1_col, 0 ) );
-	if ( m1_row != m2_row && m1_col != m2_col )
+	if ( m1_row != m2_row || m1_col != m2_col )
 	{
 		cout << "Can't add because of format!" << endl;
 		exit (1);
