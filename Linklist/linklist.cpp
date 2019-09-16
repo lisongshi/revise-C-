@@ -38,6 +38,7 @@ bool Linklist<T>::creatList(int n)
 		ptem = pnew;
 	}
 	ptem->next = NULL;
+	showList();
 	return true;
 
 }
@@ -67,7 +68,7 @@ bool Linklist<T>::count()
 		num += 1;
 		ptem = ptem->next;
 	}
-	std::cout << "the number of cells is:" << num << std::endl;
+	std::cout << "the number of nodes is:" << num -1 << std::endl;
 	return true;
 
 }
@@ -89,6 +90,7 @@ bool Linklist<T>::insert()
 	std::cin >> ptem->element;
 	pre_node->next = ptem;
 	ptem->next = next_node;
+	showList();
 	return true;
 
 }
@@ -107,7 +109,6 @@ bool Linklist<T>::deleteNode()
 	Node<T>* del_node = pre_node->next;
 	pre_node->next = del_node->next;
 	delete del_node;
+	showList();
 	return true;
 }
-
-
