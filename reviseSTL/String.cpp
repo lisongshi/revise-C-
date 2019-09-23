@@ -86,6 +86,50 @@ int main()
 	//output:today is a very good day ! day is a nic
 
 //4.find some specific string in str
+//	Func:str.find(string, beginning position) from left to right, return  size_t position 
+//		 str.rfind starts at beginning position and from the right to the left
+	size_t position = 0;
+	string keyWord = "day";
+	position = str1.find(keyWord, 0);
+	cout << position << endl;
+	// position = 2
+	position = str1.rfind(keyWord, str1.size() - 1 );
+	cout << position << endl;
+	//position  = 27
+	
+
+	//find all keywords in the sentence.
+	//1.
+	size_t posLeft = 0;
+	size_t posRight = str1.length() - 1;
+	while (posLeft != posRight)
+	{
+		posLeft = str1.find(keyWord, posLeft);
+		posRight = str1.rfind(keyWord, posRight);
+		cout << posLeft << "\t" << posRight << endl;
+		if (posLeft == posRight)
+			break;
+		else
+		{
+			posLeft += keyWord.length();
+			posRight -= keyWord.length();
+		}
+	}
+	
+	//2.
+	posLeft = 0;
+	while ( 1 )
+	{
+		posLeft = str1.find(keyWord, posLeft);
+		if (posLeft > str1.length())
+			break;
+		cout << posLeft << endl;
+		posLeft += keyWord.length();
+		
+	}
+	cout << "find all keywords" << endl;
+
+	
 
 
 
