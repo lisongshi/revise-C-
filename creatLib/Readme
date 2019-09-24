@@ -1,0 +1,14 @@
+
+I.try to creat a static lib using VS2019
+
+1.finishing your code .h & .cpp by VS2019
+2.Build -> Build yourProgramName.lib , note that program in debug and in release are different. (also x86 & x64)
+3.check the path of your file(.h & .lib). it's convenient that copy your head&lib file to a new folder.
+
+II.how to using the lib
+1.creat or open a new project which you wanna use the lib you have created before.
+2.Project -> yourProjectName properties
+  2.1. C/C++ -> Additional Include Directories : add your .h file path at here. 
+  2.2  Linker ->Additional Library Directories : add your .lib file path at here.
+  2.3  Input -> Additional Dependencies : add the name of lib.
+3.test your project with lib !
