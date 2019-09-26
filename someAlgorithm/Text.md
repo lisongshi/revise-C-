@@ -1,4 +1,5 @@
 1.hashmap
+
 ![Image text](https://github.com/lisongshi/reviseC-/blob/master/someAlgorithm/img/hashmap.png)
 
 可以视为一种数组+链表的复合结构
