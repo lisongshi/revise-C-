@@ -42,15 +42,39 @@ int main()
 	//output:to
 	cout << "----------------------------------" << endl;
 
+	//rend                       end
+	//¡ı    iterator in string    ¡ı
+	//  wwwwwwwwaaaaaaaaaddddddddd
+    // ¡ü                        ¡ü                  	
+	//begin                    rbegin
+	// str.end() = str.begin() + str.length() 
+	// str.rend() = str.rbegin() +str.length()
+	// *( str.end() - 1 ) = *str.rbegin() = d  
+	// *( str.rend() - 1 ) = *str.beging() = w
+
+
+	cout << "show the string by iterator:" << endl;
+	for (string::iterator lIter = str1.begin(); lIter != str1.end(); ++lIter)
+		cout << *lIter;
+		//output:today is a nice day !
+	cout << endl;
+	for (string::reverse_iterator rIter = str1.rbegin(); rIter != str1.rend(); ++rIter)
+		cout << *rIter;
+	cout << endl;
+
+
 
 //3.change the element of str1
 	str1[0] = 'n';
 	str1.at(str1.size() - 2) = '?';
 	cout << str1 << endl;
-	//output:"nooday is a nice day ? "
+	//output:"noday is a nice day ? "
 
-	//Func:str.erase() wait until study iterator !!!!!!!
-	
+	//Func:str.erase(iterator begin, iterator end)
+	str1.erase(str1.end() - 5, str1.end());
+	cout << str1 << endl;
+
+
 	//Func:str.swap(string) exchange str1 & str2
 	str1.swap(str2);
 	cout << "new str1 :" << str1 << endl << "new str2 :" << str2 << endl;
@@ -86,8 +110,10 @@ int main()
 	//output:today is a very good day ! day is a nic
 
 //4.find some specific string in str
-//	Func:str.find(string, beginning position) from left to right, return  size_t position 
-//		 str.rfind starts at beginning position and from the right to the left
+	//	Func:str.find(string, beginning position) from left to right, 
+	//		 str.rfind starts at beginning position and from the right to the left
+	//	     return  size_t position, if not find the string, return string::npos
+	
 	size_t position = 0;
 	string keyWord = "day";
 	position = str1.find(keyWord, 0);
@@ -96,13 +122,16 @@ int main()
 	position = str1.rfind(keyWord, str1.size() - 1 );
 	cout << position << endl;
 	//position  = 27
-	
+	string noExist = "keep";
+	if (str1.find(noExist, 0) == string::npos)
+		cout << noExist << " do not exist in this sentence" << endl;
+
 
 	//find all keywords in the sentence.
 	//1.
 	size_t posLeft = 0;
 	size_t posRight = str1.length() - 1;
-	while (posLeft != posRight)
+	while (posLeft < str1.length())
 	{
 		posLeft = str1.find(keyWord, posLeft);
 		posRight = str1.rfind(keyWord, posRight);
@@ -129,10 +158,6 @@ int main()
 	}
 	cout << "find all keywords" << endl;
 
-	
-
-
-
 
 	cout << "----------------------------------" << endl;
 	
@@ -150,15 +175,6 @@ int main()
 	else if (strFlag == "bad")
 		cout << str2 << str2.length() << endl;
 	else
-		cout << "just soso" << endl;
-
-	
-		
-
-
-
-
-
 
 //6.stream in & out 
 	
