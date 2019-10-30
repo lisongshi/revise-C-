@@ -11,7 +11,7 @@ typedef bacis_string<Jchar> Jstring; //Japanese string
 
 */
 
-int main()
+bool testString()
 {
 	using std::cin;
 	using std::cout;
@@ -205,6 +205,6 @@ int main()
 	//string testString3 = testString1 + testString2;
 	//cout << testString3 << "\nand the size is:" << testString3.size() << endl;
 
-	return 0;
+	return true;
 }
 
