@@ -12,4 +12,6 @@ Date: Oct 30, 2019
 2.aboutMatlab: simulate points and some simple tools  
 3.do experiment in lab about outlier rejection and study the method of SLAM  
 Good luck Nov  
-
+  
+Data: Oct 31, 2019  
+Happy Halloween!  
