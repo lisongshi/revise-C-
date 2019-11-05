@@ -2,17 +2,47 @@
 #include <iostream>
 #include <vector>
 
+#define INITIAL_SIZE 5
+
+//rend                       end
+//¡ý    iterator              ¡ý
+//  dwwwwwwwaaaaaaaaaddddddddd
+// ¡ü                        ¡ü                  	
+//begin                    rbegin
+
 // output all elements in vector
 template<typename T>
-bool showVector(std::vector<T> list)
+bool showVector(std::vector<T> list, int flag = 1)
 {
-	
 	// auto for self-adaptive type
-	for (auto lIter = list.begin(); lIter != list.end(); ++lIter)
-		std::cout << *lIter << "  ";
-	std::cout<< std::endl;
-	return true;
+	// method 1
+	switch ( flag )
+	{
 
+	case 1:
+		// method 1
+		for ( auto lIter = list.begin (); lIter != list.end (); ++lIter )
+			std::cout << *lIter << "  ";
+		std::cout << std::endl;
+		break;
+	case 2:
+		// method 2
+		for ( int i = 0; i < list.size(); i++ )
+			std::cout << list.at (i) << " ";
+		std::cout << std::endl;
+		break;
+	case 3:
+		// method 3
+		// element's data type is T. in this issue,it's double,not iterator or pointer. 
+		for ( auto element : list )
+			std::cout << element << " ";
+		std::cout << std::endl;
+		break;
+	default:
+		break;
+	}
+
+	return true;
 }
 
 // & for reference
@@ -111,9 +141,6 @@ bool delElement (std::vector<T>& list)
 
 	// delete all elements if it front 9.
 	
-
-	
-
 	auto tempIndex = list.begin ();
 	while ( true ) 
 	{
@@ -132,7 +159,49 @@ bool delElement (std::vector<T>& list)
 	}
 	showVector (list);
 
-	
+	return true;
+}
+
+
+bool testVector ()
+{
+	// Initial doubleList with 9,9,9 ... 9.  
+	std::vector<double> doubleList (INITIAL_SIZE, 9);
+	std::vector<std::string> stringList{ "bei","jing","welcome","to","you" };
+
+	// visit & change element in vector
+	// .at() will check the validity of index to avoid out of range,while [] will not do it. 
+	doubleList[1] = 3.14;
+	doubleList.at (2) = 3.33;
+
+	// add element into vector 
+	// vector.size() will be 11 and vector.capcity will over 11,which is dependent by compiler. in VS2019, it's 15.  
+	// emplace_back() is more effective than push_back() for no move
+	doubleList.push_back (1);
+	doubleList.emplace_back (5.14);
+
+	// .size() return size_t type, or u can choose auto 
+	size_t num1 = doubleList.size ();
+	auto num2 = doubleList.size ();
+	std::cout << num1 << std::endl;
+	std::cout << doubleList.capacity () << std::endl;
+
+	// reserve only change the capacity
+	doubleList.reserve (11);
+	std::cout << doubleList.size () << std::endl;
+	std::cout << doubleList.capacity () << std::endl;
+
+	// resize change the size and capacity.
+	doubleList.resize (5);
+	std::cout << doubleList.size () << std::endl;
+	std::cout << doubleList.capacity () << std::endl;
+
+
+	std::vector<double> verVector;
+	reverseVector (doubleList, verVector);
+	// insert sth behind the second element.
+	insertVector (verVector, 2);
+	delElement (verVector);
 
 	return true;
 }
