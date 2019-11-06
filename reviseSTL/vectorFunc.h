@@ -144,18 +144,12 @@ bool delElement (std::vector<T>& list)
 	auto tempIndex = list.begin ();
 	while ( true ) 
 	{
-		tempIndex = std::find (tempIndex, list.end(), 9.0);
+		tempIndex = std::find (++tempIndex, list.end(), 9.0);
 
 		if ( tempIndex == list.end() )
 			break;
-		else if ( tempIndex == list.begin() )
-		{
-			tempIndex = list.begin() + 1;
-			continue;
-		}
-		else 
+		else
 			tempIndex = list.erase (tempIndex - 1);
-
 	}
 	showVector (list);
 
