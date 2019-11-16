@@ -1,12 +1,19 @@
-﻿// Time: 14, Nov, 2019
+﻿// Time: 14, Nov, 2019 
+// Author: lisong.shi, lisong.shi@whu.edu.cn
+
+
 #include "Func.h"
+// 1 means fundamentalMat & 2 means homographMat
+#define MODEL_TYPE 1
 
 int main()
 {
-	// 1 means to fundamentalMat & 2 means to homographMat
 	std::vector<int> ptIndex;
-	std::vector<cv::Point2f> pt1, pt2;
+	std::vector<cv::Point2f> pt1, pt2, outliers;
 	cv::Mat model;
-	readPt (ptIndex, pt1, pt2);
-	runRansac (model, ptIndex, pt1, pt2, MODEL_TYPE);
+	std::string dir = "D:/code/C++/measurementAdjustment/";
+	readPt (dir,ptIndex, pt1, pt2);
+	runRansac (model, ptIndex, pt1, pt2, outliers, MODEL_TYPE);
+	saveRes (dir, model, outliers, MODEL_TYPE);
+	return 0;
 }
