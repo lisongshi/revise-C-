@@ -1,10 +1,13 @@
 ﻿// Time: 14, Nov, 2019 
 // Author: lisong.shi, lisong.shi@whu.edu.cn
-
-
+#include <string>
+#include <algorithm>
 #include "Func.h"
+#include "postTreament.h"
+
 // 1 means fundamentalMat & 2 means homographMat
 #define MODEL_TYPE 1
+
 
 int main()
 {
@@ -15,5 +18,6 @@ int main()
 	readPt (dir,ptIndex, pt1, pt2);
 	runRansac (model, ptIndex, pt1, pt2, outliers, MODEL_TYPE);
 	saveRes (dir, model, outliers, MODEL_TYPE);
+	camparePt (dir);
 	return 0;
 }

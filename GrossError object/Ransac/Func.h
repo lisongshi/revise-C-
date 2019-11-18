@@ -1,11 +1,13 @@
 #pragma once
 #include <fstream>
+#include <vector>
 #include <string>
 #include "estimator.h"
 
-#define SCALE_SIZE 300
-#define lambda 1
-#define SCALE_SQUARED 90000
+// lambda is used to balance the weight in X & Y axis
+#define lambda 0.24
+#define SCALE_SIZE 1
+#define SCALE_SQUARED 1
 // 4 * 2.8um = 11.2um i.e. 0.0112mm
 #define RES_THRESHOLD 0.0112
 
@@ -41,6 +43,7 @@ bool readPt (const std::string & dir_,
 			 std::vector<cv::Point2f> & point1_,
 			 std::vector<cv::Point2f> & point2_)
 {
+	// img1: 256 , img2: 345 , img3: 255
 	size_t numPt1 = 256, numPt2 = 345;
 	std::ifstream pointTxt1 (dir_ + "img1.txt");
 	std::ifstream pointTxt2 (dir_ + "img2.txt");
@@ -134,12 +137,12 @@ bool runRansac (cv::Mat & model_,
 	std::vector<uchar> ransacFlag;
 	if ( type_ == 1 )
 	{
-		model_ = cv::findFundamentalMat (point1_, point2_, ransacFlag, cv::FM_RANSAC);
+		model_ = cv::findFundamentalMat (point1_, point2_, ransacFlag, RES_THRESHOLD * SCALE_SIZE, cv::FM_RANSAC);
 		std::cout << "Fundamental Matrix:" << std::endl;
 	}
 	else if ( type_ == 2 )
 	{
-		model_ = cv::findHomography (point1_, point2_, ransacFlag, cv::FM_RANSAC);
+		model_ = cv::findHomography (point1_, point2_, ransacFlag, cv::FM_RANSAC, RES_THRESHOLD * SCALE_SIZE);
 		std::cout << "Homograph Matrix:" << std::endl;
 	}
 	else
@@ -173,7 +176,7 @@ bool runRansac (cv::Mat & model_,
 			else if ( type_ == 2 )
 			{
 				tmpResHomograph = residualHomograph (model_, point1_.at (i), point2_.at (i));
-				if ( *(tmpResHomograph + 1) > RES_THRESHOLD )
+				if ( *(tmpResHomograph + 1) / SCALE_SIZE * 1000 > 2.8 * 4  )
 				{
 					std::cout << ptIndex_.at (i) << " \t\t\t ";
 					std::cout << "res in Y:" << *(++tmpResHomograph) / SCALE_SIZE * 1000 << std::endl;
